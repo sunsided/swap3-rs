@@ -1,0 +1,26 @@
+[package]
+name = "swap3"
+version = "0.1.0"
+description = "Swapping of three references, rotating the values left or right"
+authors = ["Markus Mayer"]
+repository = "https://github.com/sunsided/swap3-rs"
+keywords = ["swapping", "rotation"]
+categories = ["algorithms"]
+license = "MIT"
+readme = "README.md"
+edition = "2021"
+
+[features]
+unsafe = []
+
+[dev-dependencies]
+criterion = "0.5.1"
+rand = "0.8.5"
+
+[[bench]]
+name = "rot_slice"
+harness = false
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
