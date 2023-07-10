@@ -31,7 +31,7 @@
 //! ```
 //! let mut vec = vec![10, 20, 30, 40, 50, 60];
 //! swap3::swap3_bca_slice(&mut vec, 0, 1, 4);
-//! assert_eq!(vec, &[30, 50, 30, 40, 10, 60]);
+//! assert_eq!(vec, &[20, 50, 30, 40, 10, 60]);
 //! ```
 
 //  SPDX-FileCopyrightText: 2023 Markus Mayer
@@ -42,6 +42,11 @@
 // only enables the `doc_cfg` feature when
 // the `docsrs` configuration attribute is defined
 #![cfg_attr(docsrs, feature(doc_cfg))]
+
+/// Provides simple access to commonly used traits.
+pub mod prelude {
+    pub use crate::Swap3;
+}
 
 /// Rotates three values to the left.
 ///
@@ -133,6 +138,55 @@ pub fn swap3_cab_slice<T>(data: &mut [T], a: usize, b: usize, c: usize) {
     slice::cab_unsafe(data, a, b, c);
     #[cfg(not(feature = "unsafe"))]
     slice::cab_safe(data, a, b, c);
+}
+
+/// Trait providing the [`Swap3::swap3_bca`] and [`Swap3::swap3_cab`] functions directly.
+pub trait Swap3<I = usize> {
+    /// Rotates three values to the left.
+    ///
+    /// ## Arguments
+    ///
+    /// * `a` - The first index, to be assigned with the value of `data[b]`.
+    /// * `b` - The second index, to be assigned with the value of `data[c]`.
+    /// * `c` - The third index, to be assigned with the value of `data[a]`.
+    ///
+    /// ## Example
+    ///
+    /// ```
+    /// use swap3::prelude::*;
+    /// let mut vec = vec![50, 10, 90, 25, 30, 75];
+    /// vec.swap3_bca(0, 1, 4);
+    /// assert_eq!(vec, &[10, 30, 90, 25, 50, 75]);
+    /// ```
+    fn swap3_bca(&mut self, a: I, b: I, c: I);
+
+    /// Rotates three values to the right.
+    ///
+    /// ## Arguments
+    ///
+    /// * `a` - The first index, to be assigned with the value of `data[c]`.
+    /// * `b` - The second index, to be assigned with the value of `data[a]`.
+    /// * `c` - The third index, to be assigned with the value of `data[b]`.
+    ///
+    /// ## Example
+    ///
+    /// ```
+    /// use swap3::prelude::*;
+    /// let mut vec = vec![50, 10, 90, 25, 30, 75];
+    /// vec.swap3_cab(0, 1, 4);
+    /// assert_eq!(vec, &[30, 50, 90, 25, 10, 75]);
+    /// ```
+    fn swap3_cab(&mut self, a: I, b: I, c: I);
+}
+
+impl<T> Swap3<usize> for [T] {
+    fn swap3_bca(&mut self, a: usize, b: usize, c: usize) {
+        swap3_bca_slice(self, a, b, c)
+    }
+
+    fn swap3_cab(&mut self, a: usize, b: usize, c: usize) {
+        swap3_cab_slice(self, a, b, c)
+    }
 }
 
 pub mod slice {
@@ -309,5 +363,19 @@ mod tests {
         let mut vec = vec![50, 10, 90, 25, 30, 75];
         slice::cab_unsafe(&mut vec, 0, 1, 4);
         assert_eq!(vec, &[30, 50, 90, 25, 10, 75]);
+    }
+
+    #[test]
+    fn test_vec_trait_bca() {
+        let mut vec = vec![50, 10, 90, 25, 30, 75];
+        vec.swap3_bca(0, 1, 4);
+        assert_eq!(vec, &[10, 30, 90, 25, 50, 75]);
+    }
+
+    #[test]
+    fn test_array_trait_cab() {
+        let mut vec = [50, 10, 90, 25, 30, 75];
+        vec.swap3_cab(0, 1, 4);
+        assert_eq!(vec, [30, 50, 90, 25, 10, 75]);
     }
 }
