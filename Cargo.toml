@@ -1,6 +1,6 @@
 [package]
 name = "swap3"
-version = "0.1.0"
+version = "0.2.0"
 description = "Swapping of three references, rotating the values left or right"
 authors = ["Markus Mayer"]
 repository = "https://github.com/sunsided/swap3-rs"

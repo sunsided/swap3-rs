@@ -33,6 +33,16 @@
 //! swap3::swap3_bca_slice(&mut vec, 0, 1, 4);
 //! assert_eq!(vec, &[20, 50, 30, 40, 10, 60]);
 //! ```
+//!
+//! ... or using the [`Swap3`] trait imported from the prelude:
+//!
+//! ```
+//! use swap3::prelude::*;
+//!
+//! let mut vec = vec![10, 20, 30, 40, 50, 60];
+//! vec.swap3_bca(0, 1, 4);
+//! assert_eq!(vec, &[20, 50, 30, 40, 10, 60]);
+//! ```
 
 //  SPDX-FileCopyrightText: 2023 Markus Mayer
 //  SPDX-License-Identifier: MIT
