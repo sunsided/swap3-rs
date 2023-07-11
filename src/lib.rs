@@ -44,8 +44,8 @@
 //! assert_eq!(vec, &[20, 50, 30, 40, 10, 60]);
 //! ```
 
-//  SPDX-FileCopyrightText: 2023 Markus Mayer
-//  SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2023 Markus Mayer
+// SPDX-License-Identifier: MIT
 
 #![cfg_attr(feature = "unsafe", allow(unsafe_code))]
 #![cfg_attr(not(feature = "unsafe"), forbid(unsafe_code))]
@@ -242,9 +242,13 @@ pub mod slice {
     #[cfg(feature = "unsafe")]
     #[inline(always)]
     pub fn bca_unsafe<T>(data: &mut [T], a: usize, b: usize, c: usize) {
-        // NOTE: This code is taken from the implementation of slice::swap and extended for three values.
-        //       The original code was licensed under an MIT license by The Rust Core Library authors.
         use std::ptr;
+
+        // SPDX-SnippetBegin
+        // SDPX—SnippetName: Adjusted slice::swap() from the Rust core library.
+        // SPDX-SnippetCopyrightText: The Rust Core Library authors
+        // SPDX-SnippetContributor: Adjusted by Markus Mayer for three arguments.
+        // SPDX-License-Identifier: MIT
 
         let pa = ptr::addr_of_mut!(data[a]);
         let pb = ptr::addr_of_mut!(data[b]);
@@ -259,6 +263,8 @@ pub mod slice {
             // ptr::swap_nonoverlapping(pa, pb, 1);
             // ptr::swap_nonoverlapping(pb, pc, 1);
         }
+
+        // SPDX-SnippetEnd
     }
 
     /// Rotates three values to the right.
@@ -303,9 +309,13 @@ pub mod slice {
     #[cfg(feature = "unsafe")]
     #[inline(always)]
     pub fn cab_unsafe<T>(data: &mut [T], a: usize, b: usize, c: usize) {
-        // NOTE: This code is taken from the implementation of slice::swap and extended for three values.
-        //       The original code was licensed under an MIT license by The Rust Core Library authors.
         use std::ptr;
+
+        // SPDX-SnippetBegin
+        // SDPX—SnippetName: Adjusted slice::swap() from the Rust core library.
+        // SPDX-SnippetCopyrightText: The Rust Core Library authors
+        // SPDX-SnippetContributor: Adjusted by Markus Mayer for three arguments.
+        // SPDX-License-Identifier: MIT
 
         let pa = ptr::addr_of_mut!(data[a]);
         let pb = ptr::addr_of_mut!(data[b]);
@@ -320,6 +330,8 @@ pub mod slice {
             // ptr::swap_nonoverlapping(pa, pb, 1);
             // ptr::swap_nonoverlapping(pb, pc, 1);
         }
+
+        // SPDX-SnippetEnd
     }
 }
 
