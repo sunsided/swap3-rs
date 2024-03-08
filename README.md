@@ -31,6 +31,6 @@ use swap3::prelude::*;
 fn swap3_bca() {
     let mut vec = vec![10, 20, 30, 40, 50, 60];
     vec.swap3_bca(0, 1, 4);
-    assert_eq!(vec, &[30, 50, 30, 40, 10, 60]);
+    assert_eq!(vec, &[20, 50, 30, 40, 10, 60]);
 }
 ```
