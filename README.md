@@ -27,10 +27,10 @@ For slices, the `swap3_bca_slice` and `swap3_cab_slice` functions can be used:
 
 ```rust
 use swap3::prelude::*;
- 
+
 fn swap3_bca() {
     let mut vec = vec![10, 20, 30, 40, 50, 60];
-    vec.swap3_bca(0, 1, 4);
+    vec.swap3_bca(0, 1, 4); // or swap3_bca_slice(&mut vec, 0, 1, 4)
     assert_eq!(vec, &[20, 50, 30, 40, 10, 60]);
 }
 ```
