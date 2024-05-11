@@ -1,5 +1,7 @@
 # swap3
 
+[![codecov](https://codecov.io/gh/sunsided/swap3-rs/graph/badge.svg?token=MSO2LJWX6X)](https://codecov.io/gh/sunsided/swap3-rs)
+
 Provides utility functions for simultaneously swapping three values by rotating them
 either left (`abc` → `bca`) or right (`abc` → `cab`). These functions can come in handy e.g.
 when rotating elements of a binary tree in list representation.
